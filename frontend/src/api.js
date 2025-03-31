@@ -6,3 +6,4 @@ export const analyzeSentiment = async (text) => {
     const response = await axios.post(API_URL, { text });
     return response.data;
 };
+ 

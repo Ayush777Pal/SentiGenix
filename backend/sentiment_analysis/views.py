@@ -6,9 +6,9 @@ from .utils import analyze_sentiment
 @api_view(['POST'])
 def analyze_review(request):
     text = request.data.get('text', '')
-    sentiment = analyze_sentiment(text)
+    sentiment, improved_review = analyze_sentiment(text)
 
     # Save review to database
     review = Review.objects.create(text=text, sentiment=sentiment)
-    
-    return Response({"sentiment": sentiment, "review": review.text})
+    return Response({"sentiment": sentiment, "review": review.text, "suggested_improvement": improved_review})
+ 
