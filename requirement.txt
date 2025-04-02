@@ -1,0 +1,7 @@
+pip install django djangorestframework nltk textblob pandas scikit-learn
+pip install nltk
+pip install django-cors-headers
+pip install google-generativeai
+
+npm install axios @mui/material @mui/icons-material
+npm install @emotion/react @emotion/styled

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button, Typography, Card, CardContent,Box, Stack } from "@mui/material";
+import { TextField, Button, Typography, Box, Stack } from "@mui/material";
 import { analyzeSentiment } from "../api";
 import Navbar from "./Navbar";
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
@@ -64,8 +64,9 @@ const SentimentAnalyzer = () => {
                     Analyze<ArrowOutwardIcon sx={{ color: 'yellow', fontSize: '25px' }} />
                 </Button>
                 </Box>
+                <Box display='flex' gap='50px'>
                 <Box>
-                    <Stack direction='column' sx={{marginLeft:'25%', marginTop:'60px'}}>
+                    <Stack direction='column' sx={{marginLeft:'50vh', marginTop:'60px'}}>
                         <Typography sx={{width:'200px', backgroundColor:'#ebdef0', fontWeight:'700',fontSize:'30px'
                             ,borderTopLeftRadius:'15px',borderTopRightRadius:'15px',height:'40px',justifyContent:'center',textAlign:'center',
                             display: 'flex'
@@ -93,26 +94,58 @@ const SentimentAnalyzer = () => {
             
                 <br />
                 </Box>
-                {result && (
-                    <CardContent>
+                <Box>
+                    <Stack direction='column' sx={{marginLeft:'25%', marginTop:'60px'}}>
+                        <Typography sx={{width:'300px', backgroundColor:'#ebdef0', fontWeight:'700',fontSize:'30px'
+                            ,borderTopLeftRadius:'15px',borderTopRightRadius:'15px',height:'40px',justifyContent:'center',textAlign:'center',
+                            display: 'flex'
+                        }}>Suggestion</Typography>
+                        <Box 
+                            sx={{
+                                width: '400px',
+                                height: '100px',
+                                fontWeight: '700',
+                                borderBottomLeftRadius: '15px',
+                                borderBottomRightRadius: '15px',
+                                borderTopRightRadius:'15px',
+                                backgroundColor:'#ebdef0',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                textAlign: 'center',
+                                fontSize:'35px'
+                            }}
+                        >
+                              {result && (
+                    <Box>
                             {result.sentiment === "Negative" ? (
-                            <Card variant="outlined" sx={{ mt: 2, p: 2, bgcolor: "#ffebee" }}>
-                                <Typography variant="body1" color="error">
-                                    Your review is negative. Here’s a more positive way to say it:
+
+                            <Box>
+                               <Typography variant="body2" sx={{ fontStyle: "italic", mt: 1 }}>
+                                    {showmore ? result.suggested_improvement : result.suggested_improvement.substring(0, 250)}
                                 </Typography>
-                                <Typography variant="body2" sx={{ fontStyle: "italic", mt: 1 }}>
-                                    {showmore ? result.suggested_improvement : `${result.suggested_improvement.substring(0, 250)}`}
-                                </Typography>
-                                <Typography onClick={() => setShowMore(!showmore)} sx={{ cursor: "pointer", color: "blue" }}>
+                                <Typography 
+                                    onClick={() => setShowMore(!showmore)} 
+                                    sx={{ cursor: "pointer", color: "blue" }}
+                                >
                                     {showmore ? "Show less" : "Show more"}
                                 </Typography>
-                            </Card>
+
+                            </Box>
                         ) : (
                             // If sentiment is Positive or Neutral, show nothing
                             null
                         )}
-                    </CardContent>
+                    </Box>
                 )}
+                        </Box>
+
+                    </Stack>
+            
+                <br />
+                </Box>
+                </Box>
+               
         </Box>
 
     );

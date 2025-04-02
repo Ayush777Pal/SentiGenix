@@ -12,6 +12,7 @@ const Navbar = () => {
       <Stack direction="row" sx={{gap:{lg:"40px", xs:"20px"},fontSize:{lg:"26px",sm:'24px',xs:'18px'}}} alignItems="flex-end">
         <Link to='/sentiment' style={{textDecoration:'none',color:'#3A1212'}}>Home</Link>
         <Link to='/create' style={{textDecoration:'none',color:'#3A1212'}}>Create</Link>
+        <Link to='/about' style={{textDecoration:'none',color:'#3A1212'}}>About</Link>
       </Stack>
 
     </Stack>
