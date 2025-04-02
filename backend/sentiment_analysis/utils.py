@@ -23,11 +23,11 @@ def analyze_sentiment(text):
     score = sia.polarity_scores(text)
     
     if score['compound'] >= 0.05:
-        sentiment = "Positive"
+        sentiment = "Positive 😇"
     elif score['compound'] <= -0.05:
-        sentiment = "Negative"
+        sentiment = "Negative ☹️"
     else:
-        sentiment = "Neutral"
+        sentiment = "Neutral 🙄"
 
     # If review is negative, generate an improved version
     improved_review = None
