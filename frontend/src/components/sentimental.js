@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { TextField, Button, Typography, Box, Stack } from "@mui/material";
 import { analyzeSentiment } from "../api";
 import Navbar from "./Navbar";
-import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import hand from "../assest/images/hand.png"
+
 const SentimentAnalyzer = () => {
     const [text, setText] = useState("");
     const [result, setResult] = useState(null);
-    const [showmore, setShowMore] = useState(false)
+    const [showmore, setShowMore] = useState(false);
 
     const handleAnalyze = async () => {
         const data = await analyzeSentiment(text);
@@ -15,139 +17,166 @@ const SentimentAnalyzer = () => {
 
     return (
         <Box>
-            <Navbar/>
-            <Typography variant="h5" sx={{marginTop:'30px', fontWeight:'700', fontSize:'50px', color:'black', marginLeft:'34%'}}>Sentiment Analysis</Typography>
-                <Box sx={{marginLeft:'25%',border:'2px solid white', width:'90vh',height:'30vh',borderRadius:'30px', backgroundColor:'#fbfcfc'}}>
+            <Navbar />
+
+            {/* Title */}
+            <Typography
+                variant="h3"
+                sx={{
+                    mt: 5,
+                    fontWeight: 700,
+                    textAlign: "center",
+                    color: "#f1c40f",
+                    lineHeight:.5,
+                    textShadow: '0px 0px 10px rgb(238, 212, 79)'
+
+                }}
+            >
+                Sentiment Analysis
+            </Typography>
+
+            {/* Input Section */}
+            <Box
+                sx={{
+                    width: { lg: "45%", xs: "75%" },
+                    mx: "auto",
+                    mt: 4,
+                    p: 3,
+                    pb:1,
+                    borderRadius: "15px",
+                    backgroundColor: "#ffffff",
+                    boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
+                    textAlign: "center",
+                }}
+            >
                 <TextField
                     multiline
-                    rows={7}
+                    rows={4}
+                    required
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     variant="outlined"
+                    fullWidth
+                    placeholder="Enter your text here..."
                     sx={{
-                        width: '90vh',
-                        height: '20vh',
-                        '& .MuiOutlinedInput-root': {
-                        '& fieldset': {
-                            border: 'none', // Remove border
-                        },
-                        '&:hover fieldset': {
-                            border: 'none',
-                        },
-                        '&.Mui-focused fieldset': {
-                            border: 'none',
-                        },
-                        },
-                        '& .MuiInputBase-input': {
-                        fontWeight:'500',
-                        fontSize: '30px', // Increases typed text font size
-                        color: 'black', // Ensures the text is visible
+                        fontSize: "18px",
+                        "& .MuiOutlinedInput-root": {
+                            borderRadius: "10px",
                         },
                     }}
-                    />
+                />
 
-                <br></br>
-                <Button sx={{  textDecoration: 'none',
-                  backgroundColor: '#145a32',
-                  color: 'white',
-                  marginTop:'35px',
-                  fontSize: '20px',
-                  fontWeight: '700',
-                  borderRadius: '60px',
-                  padding: '1px',
-                  width: '140px',
-                  marginLeft: '290px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',  // Center text horizontally
-                  textAlign: 'center' }} onClick={handleAnalyze}>
-                    Analyze<ArrowOutwardIcon sx={{ color: 'yellow', fontSize: '25px' }} />
+                <Button
+                    onClick={handleAnalyze}
+                    sx={{
+                        mt: 2,
+                        mb:0,
+                        backgroundColor: "#145a32",
+                        color: "white",
+                        fontSize: "18px",
+                        fontWeight: "bold",
+                        borderRadius: "50px",
+                        px: 2,
+                        py: 0.5,
+                        transition: "0.3s",
+                        "&:hover": { backgroundColor: "#117a33" },
+                    }}
+                >
+                    Analyze
+                    <ArrowOutwardIcon sx={{ color: "yellow", fontSize: "25px", ml: 1 }} />
                 </Button>
-                </Box>
-                <Box display='flex' gap='50px'>
-                <Box>
-                    <Stack direction='column' sx={{marginLeft:'50vh', marginTop:'60px'}}>
-                        <Typography sx={{width:'200px', backgroundColor:'#ebdef0', fontWeight:'700',fontSize:'30px'
-                            ,borderTopLeftRadius:'15px',borderTopRightRadius:'15px',height:'40px',justifyContent:'center',textAlign:'center',
-                            display: 'flex'
-                        }}>Result</Typography>
-                        <Typography 
-                            sx={{
-                                width: '300px',
-                                height: '100px',
-                                fontWeight: '700',
-                                borderBottomLeftRadius: '15px',
-                                borderBottomRightRadius: '15px',
-                                borderTopRightRadius:'15px',
-                                backgroundColor:'#ebdef0',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                textAlign: 'center',
-                                fontSize:'35px'
-                            }}
-                        >
-                            {result?.sentiment || "Waiting...."}
-                        </Typography>
+            </Box>
 
-                    </Stack>
-            
-                <br />
+            {/* Results Section */}
+            <Stack
+                direction={{ lg: "row", xs: "column" }}
+                spacing={3}
+                justifyContent="center"
+                alignItems="center"
+                mt={5}
+            >
+                {/* Result Box */}
+                <Box
+                    sx={{
+                        width: { lg: "280px", xs: "70%" },
+                        backgroundColor: "#d4e6f1",
+                        borderRadius: "15px",
+                        textAlign: "center",
+                        p: 2,
+                        pt:.5,
+                        marginRight:3,
+                        boxShadow: "5px 8px 5px 2px rgb(51, 53, 55)"
+                    }}
+                >
+                    <Typography sx={{ fontWeight: "600", fontSize: "28px", mb: 1, justifyContent:'center',alignItems:"center"
+                            }}>Result</Typography>
+                    <Typography sx={{ fontSize: "26px", fontWeight: "bold" }}>
+                        {result?.sentiment || "Waiting..."}
+                    </Typography>
                 </Box>
-                <Box>
-                    <Stack direction='column' sx={{marginLeft:'25%', marginTop:'60px'}}>
-                        <Typography sx={{width:'300px', backgroundColor:'#ebdef0', fontWeight:'700',fontSize:'30px'
-                            ,borderTopLeftRadius:'15px',borderTopRightRadius:'15px',height:'40px',justifyContent:'center',textAlign:'center',
-                            display: 'flex'
-                        }}>Suggestion</Typography>
-                        <Box 
-                            sx={{
-                                width: '400px',
-                                height: '100px',
-                                fontWeight: '700',
-                                borderBottomLeftRadius: '15px',
-                                borderBottomRightRadius: '15px',
-                                borderTopRightRadius:'15px',
-                                backgroundColor:'#ebdef0',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                textAlign: 'center',
-                                fontSize:'35px'
-                            }}
-                        >
-                              {result && (
-                    <Box>
-                            {result.sentiment === "Negative" ? (
 
+                {/* Suggestion Box */}
+                <Box
+                    sx={{
+                        width: { lg: "350px", xs: "70%" },
+                        height:{lg:'100px',xs:"50%"},
+                        backgroundColor: "#f5cba7",
+                        borderRadius: "15px",
+                        textAlign: "center",
+                        p: 2,
+                        pt:.5,
+                        boxShadow: "5px 8px 5px 2px rgb(51, 53, 55)"
+                    }}
+                >
+                    <Typography sx={{ fontWeight: "600", fontSize: "28px", mb: 1 }}>Suggestion</Typography>
+                    <Box sx={{ fontSize: "18px", fontWeight: "500" }}>
+                        {result && result.sentiment === "Negative" ? (
                             <Box>
-                               <Typography variant="body2" sx={{ fontStyle: "italic", mt: 1 }}>
-                                    {showmore ? result.suggested_improvement : result.suggested_improvement.substring(0, 250)}
+                                <Typography variant="body2" sx={{ fontStyle: "italic" }}>
+                                    {showmore ? result.suggested_improvement : result.suggested_improvement?.substring(0, 100)}
                                 </Typography>
-                                <Typography 
-                                    onClick={() => setShowMore(!showmore)} 
-                                    sx={{ cursor: "pointer", color: "blue" }}
-                                >
-                                    {showmore ? "Show less" : "Show more"}
-                                </Typography>
-
+                                {result.suggested_improvement?.length > 100 && (
+                                    <Typography
+                                        onClick={() => setShowMore(!showmore)}
+                                        sx={{ cursor: "pointer", color: "blue", fontWeight: "bold", mt: 1 }}
+                                    >
+                                        {showmore ? "Show less" : "Show more"}
+                                    </Typography>
+                                )}
                             </Box>
                         ) : (
-                            // If sentiment is Positive or Neutral, show nothing
-                            null
+                            "No suggestions needed."
                         )}
                     </Box>
-                )}
-                        </Box>
+                </Box>
+            </Stack>
+            {/*Bottom Hand */}
+            <Box>
+            <img
+                src={hand}
+                alt="hand"
+                width="200px"
+                height="200px"
+                style={{  position: "absolute",
+                    left: 0,
+                    bottom: 0,}}
+                />
 
-                    </Stack>
-            
-                <br />
-                </Box>
-                </Box>
-               
+                <img
+                src={hand}
+                alt="hand"
+                width="200px"
+                height="200px"
+                style={{   position: "absolute",
+                    right: 0,
+                    bottom: 0,
+                    transform: "scaleX(-1)",
+                 }}
+                />
+
+
+            </Box>
         </Box>
-
     );
 };
 
