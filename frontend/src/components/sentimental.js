@@ -12,6 +12,7 @@ const SentimentAnalyzer = () => {
 
     const handleAnalyze = async () => {
         const data = await analyzeSentiment(text);
+        console.log("Result from backend:", data);
         setResult(data);
     };
 
@@ -130,10 +131,10 @@ const SentimentAnalyzer = () => {
                 >
                     <Typography sx={{ fontWeight: "600", fontSize: "28px", mb: 1 }}>Suggestion</Typography>
                     <Box sx={{ fontSize: "18px", fontWeight: "500" }}>
-                        {result && result.sentiment === "Negative" ? (
+                        {result && result.sentiment === "Negative ☹️" ? (
                             <Box>
                                 <Typography variant="body2" sx={{ fontStyle: "italic" }}>
-                                    {showmore ? result.suggested_improvement : result.suggested_improvement?.substring(0, 100)}
+                                    {showmore ? result.suggested_improvement: result.suggested_improvement?.substring(0, 100)}
                                 </Typography>
                                 {result.suggested_improvement?.length > 100 && (
                                     <Typography

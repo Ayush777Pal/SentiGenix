@@ -1,18 +1,17 @@
-import google.generativeai as genai
+import requests
+import google.generativeai as genai 
 from nltk.sentiment import SentimentIntensityAnalyzer
 
-# Set your Gemini API key
-
+# Initialize NLTK sentiment analyzer
 sia = SentimentIntensityAnalyzer()
 
-from nltk.sentiment import SentimentIntensityAnalyzer
-
-sia = SentimentIntensityAnalyzer()
-
+# OpenRouter API configuration
+API_URL = "https://openrouter.ai/api/v1/chat/completions"
+API_KEY = "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"  # Replace with your valid key
 
 def analyze_sentiment(text):
     score = sia.polarity_scores(text)
-    
+
     if score['compound'] >= 0.05:
         sentiment = "Positive 😇"
     elif score['compound'] <= -0.05:
@@ -20,17 +19,38 @@ def analyze_sentiment(text):
     else:
         sentiment = "Neutral 🙄"
 
-    # If review is negative, generate an improved version
+    # Generate improved review if sentiment is negative
     improved_review = None
-    if sentiment == "Negative":
-        improved_review = suggest_improvement(text)
+    if "Negative" in sentiment:
+        improved_review = suggest_improvement(text, "positive")
 
     return sentiment, improved_review
 
-def suggest_improvement(text):
-    prompt = f"Rewrite the following review in a more positive and constructive way: '{text}'"
 
-    model = genai.GenerativeModel("gemini-2.0-flash")  # Use Gemini Pro model
-    response = model.generate_content(prompt)
+def suggest_improvement(text, target_sentiment):
+    prompt = (
+        f"Your task is to take the following sentence:\n\"{text}\"\n\n"
+        f"and convert it to have a '{target_sentiment}' sentiment while preserving its core meaning.\n"
+        f"If it already has the same sentiment, enhance that sentiment further.\n"
+        f"Return only the transformed sentence."
+    )
 
-    return response.text  # Gemini response
+    headers = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json",
+    }
+
+    data = {
+        "model": "deepseek/deepseek-chat-v3-0324:free",
+        "messages": [{"role": "user", "content": prompt}]
+    }
+
+    try:
+        response = requests.post(API_URL, headers=headers, json=data)
+        response_json = response.json()
+        transformed_text = response_json.get("choices", [{}])[0].get("message", {}).get("content", "No response from AI")
+
+    except Exception as e:
+        transformed_text = f"Error: {str(e)}"
+
+    return transformed_text
