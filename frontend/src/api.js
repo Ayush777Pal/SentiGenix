@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = "http://127.0.0.1:8000";
+const BASE_URL = "https://ayush717.pythonanywhere.com";
 
 export const analyzeSentiment = async (text) => {
     const response = await axios.post(`${BASE_URL}/analyze/`, { text });

@@ -4,28 +4,30 @@ import robot from '../assest/images/robot.png';
 import Abhinav from '../assest/images/Abhinav.jpeg';
 import Aditya from '../assest/images/Aditya.png';
 import Jindal from '../assest/images/Jindal.jpeg';
-import ayush from '../assest/images/ayush.jpeg'
+import ayush from '../assest/images/ayush.jpeg';
 import { Box, Stack, Typography, Avatar } from '@mui/material';
 
 const teamMembers = [
-  { name: 'Ayush Pal', role: 'Team Lead', branch: 'CSE', rollNo: '2210013135031', img:ayush },
-  { name: 'Aditya', role: 'Backend Developer', branch: 'CSE', rollNo: '2210013135009', img: Aditya },
-  { name: 'Abhinav', role: 'Frontend Developer', branch: 'CSE', rollNo: '2210013135004', img: Abhinav  },
+  { name: 'Ayush Pal', role: 'Team Lead', branch: 'CSE', rollNo: '2210013135031', img: ayush },
+  { name: 'Aditya Kant Kushwaha', role: 'Backend Developer', branch: 'CSE', rollNo: '2210013135009', img: Aditya },
+  { name: 'Abhinav Chaurasia', role: 'Frontend Developer', branch: 'CSE', rollNo: '2210013135004', img: Abhinav },
   { name: 'Ayush Jindal', role: 'Designer/Research', branch: 'CSE', rollNo: '2210013135030', img: Jindal },
 ];
 
 const About = () => {
   return (
-    <Box  sx={{
-      bgcolor: "#121212",  
-      color: "white",
-      minHeight: "100vh",  
-      width: "100vw",       
-      position: "absolute", 
-      top: 0,
-      left: 0,
-      zIndex: -1            
-    }}>
+    <Box
+      sx={{
+        bgcolor: "#121212",
+        color: "white",
+        minHeight: "100vh",
+        width: "100vw",
+        position: "absolute",
+        top: 0,
+        left: 0,
+        zIndex: -1,
+      }}
+    >
       <Navbar />
       <Stack alignItems="center" textAlign="center" spacing={3} p={3}>
         <Typography
@@ -47,8 +49,9 @@ const About = () => {
         </Typography>
         <Typography sx={{ fontSize: { lg: '18px', xs: '14px' }, color: '#aaa', maxWidth: '85%' }}>
           SentiGenix is an AI-powered sentiment analysis tool that helps users analyze the emotions behind text and
-          improve negative feedback constructively. Using NLP and Google Gemini AI, it identifies whether a given text
-          is Positive, Negative, or Neutral and provides enhanced, constructive versions of negative feedback.
+          improve negative feedback constructively. Using NLP and DeepSeek AI, it identifies whether a given text
+          is Positive, Negative, or Neutral and provides enhanced,<br></br> constructive versions of negative feedback.<br></br>
+          SentiGenix not only analyze the sentiments but its special feature also creates the personalize sentiment for user using DeepSeek AI via Openrouter
         </Typography>
         <Box>
           <img src={robot} alt="robot" style={{ maxWidth: '100%', height: 'auto' }} />
@@ -66,7 +69,7 @@ const About = () => {
           Our Team
         </Typography>
         <Stack
-          direction="row"
+          direction={{ xs: 'column', sm: 'row' }} // Stacks vertically on mobile
           flexWrap="wrap"
           justifyContent="center"
           spacing={3}
@@ -80,15 +83,15 @@ const About = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                width: { lg: '220px', xs: '50%' },
-                padding: 3,
+                width: { lg: '220px', xs: '90%' },  // Adjust width for mobile
+                padding: { xs: 3, lg: 2 },  // Adjust padding for mobile
                 borderRadius: 3,
                 boxShadow: 5,
                 bgcolor: 'rgba(255, 255, 255, 0.1)',
                 backdropFilter: 'blur(10px)',
                 textAlign: 'center',
                 color: 'white',
-                mb:{xs:'50px'}
+                mb: { xs: '30px', lg: '50px', sm: '40px' },  // Adjust margin for mobile
               }}
             >
               <Avatar src={member.img} alt={member.name} sx={{ width: 90, height: 90, marginBottom: 2 }} />

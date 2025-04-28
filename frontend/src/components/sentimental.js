@@ -146,7 +146,7 @@ const SentimentAnalyzer = () => {
                                 )}
                             </Box>
                         ) : (
-                            "No suggestions needed."
+                            "No suggestions needed." 
                         )}
                     </Box>
                 </Box>

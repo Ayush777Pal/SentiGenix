@@ -2,14 +2,14 @@ import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import sentilogo from '../assest/images/sentilogo.png'
+import sentilogo from '../assest/images/sentilogo.png';
 
 const Intro = () => {
   return (
     <Box>
       <Box
         sx={{
-          mt: { lg: "120px", xs: "50px" }, // Reduced top margin
+          mt: { lg: "120px", xs: "50px" }, // Adjust top margin for smaller screens
           textAlign: "center",
         }}
       >
@@ -20,11 +20,15 @@ const Intro = () => {
           alignItems="center"
           flexWrap="wrap"
           gap={2}
+          sx={{
+            flexDirection: { xs: "column", md: "row" }, // Stacks vertically on small screens
+            alignItems: { xs: "center", md: "center" },
+          }}
         >
           <Typography
             fontWeight={700}
             sx={{
-              fontSize: { lg: "100px", md: "80px", xs: "60px" }, // Decreased font size
+              fontSize: { lg: "100px", md: "80px", xs: "60px" }, // Adjust font size for smaller screens
               background: "linear-gradient(90deg, #fffacd, #ffb347)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -45,12 +49,13 @@ const Intro = () => {
 
         {/* Buttons */}
         <Stack
-          direction={{ lg: "row", xs: "column" }}
+          direction="row"
           sx={{
             marginTop: "50px",
             justifyContent: "center",
-            gap: "20px",
+            gap: "15px", // Reduced gap to ensure buttons fit in one line
             alignItems: "center",
+            flexWrap: "wrap", // Wraps buttons on smaller screens
           }}
         >
           <Link
@@ -59,15 +64,16 @@ const Intro = () => {
               textDecoration: "none",
               backgroundColor: "#FFD700", // Golden Yellow
               color: "#003300", // Dark Green
-              fontSize: "24px",
+              fontSize: "18px", // Reduced font size for mobile
               fontWeight: "700",
               borderRadius: "50px",
-              padding: "10px 25px",
+              padding: "12px 25px", // Adjust padding for better touch targets
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               transition: "0.3s",
-              marginRight:'40px'
+              maxWidth: "200px", // Max width for buttons on mobile
+              flex: "1 1 auto", // Allow buttons to grow and shrink
             }}
             onMouseEnter={(e) => (e.target.style.backgroundColor = "#145a32")}
             onMouseLeave={(e) => (e.target.style.backgroundColor = "#FFD700")}
@@ -82,14 +88,16 @@ const Intro = () => {
               textDecoration: "none",
               backgroundColor: "#FFD700", // Golden Yellow
               color: "#003300", // Dark Green
-              fontSize: "24px",
+              fontSize: "18px", // Reduced font size for mobile
               fontWeight: "700",
               borderRadius: "50px",
-              padding: "10px 25px",
+              padding: "12px 25px", // Adjust padding for better touch targets
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               transition: "0.3s",
+              maxWidth: "200px", // Max width for buttons on mobile
+              flex: "1 1 auto", // Allow buttons to grow and shrink
             }}
             onMouseEnter={(e) => (e.target.style.backgroundColor = "#145a32")}
             onMouseLeave={(e) => (e.target.style.backgroundColor = "#FFD700")}
