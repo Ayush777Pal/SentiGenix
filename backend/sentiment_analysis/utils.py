@@ -1,14 +1,14 @@
 import requests
 import google.generativeai as genai 
 from nltk.sentiment import SentimentIntensityAnalyzer
-
+from decouple import config
 # Initialize NLTK sentiment analyzer
 sia = SentimentIntensityAnalyzer()
-
+ 
 # OpenRouter API configuration
-API_URL = "https://openrouter.ai/api/v1/chat/completions"
-API_KEY = "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"  # Replace with your valid key
-
+API_URL = config("MY_API_URL")
+API_KEY = config("MY_API_KEY")
+#NPL
 def analyze_sentiment(text):
     score = sia.polarity_scores(text)
 
